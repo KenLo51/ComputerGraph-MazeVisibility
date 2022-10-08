@@ -15,4 +15,4 @@ NTUST 111-1-賴祐吉-電腦圖學導論 Project2(Maze Visibility)
  2. 於Maze View中使用wasd或←↑→↓控制移動，滑鼠按住拖曳旋轉視角，L-Shift加速移動
 
 #### 運行結果
-![](https://i.imgur.com/s58q1LZ.png)
+![](https://i.imgur.com/2v4VGM0.png)
