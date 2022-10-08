@@ -75,6 +75,8 @@ draw(void)
 		fl_color(FL_RED);
 		maze->Draw_Frustum(x(), y(), x() + w() - 1, y() + h() - 1);
 
+		//printf("%d, %d, %d, %d\n", x(), y(), x() + w() - 1, y() + h() - 1);
+
 		// Restore the original clip region
 		fl_pop_clip();
 	}
@@ -97,12 +99,17 @@ Draw_Frustum(void)
 		// Make sure we only draw inside the widget.
 		fl_push_clip(x(), y(), w(), h());
 
+		fl_color(FL_WHITE);
+		fl_rectf(x(), y(), w(), h());
+
 		// The frustum is drawn on in red.
 		fl_color(FL_RED);
-
 		// The maze knows how to draw its frustum if you give it the
 		// location and dimension of the window to draw into.
+		fl_color(FL_RED);
 		maze->Draw_Frustum(x(), y(), x() + w() - 1, y() + h() - 1);
+
+		maze->Draw_Map(x(), y(), x() + w() - 1, y() + h() - 1);
 
 		// Restore the clip region.
 		fl_pop_clip();

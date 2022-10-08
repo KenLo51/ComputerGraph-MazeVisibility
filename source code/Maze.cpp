@@ -650,16 +650,7 @@ Draw_View(const float focal_dist)
 	mat4 viewTrans = transform(mat4(1.0f), vec3(-Maze::viewer_posn[0], -Maze::viewer_posn[2], -Maze::viewer_posn[1]));
 	mat4 viewRotate = rotate(mat4(1.0f), Maze::To_Radians(viewer_dir + 90.0f), vec3(0.0f, 1.0f, 0.0f));
 	mat4 viewProj = perspective(Maze::viewer_fov, 1.0f, 0.0f, 2e+3);
-	//Edge viewLeftEdge(500,
-	//	&Vertex(-1, Maze::viewer_posn[0], Maze::viewer_posn[1]),
-	//	&Vertex(-1, Maze::viewer_posn[0] + 2e+2 * cos(Maze::To_Radians(viewer_dir + Maze::viewer_fov / 2)),
-	//		Maze::viewer_posn[1] + 2e+2 * sin(Maze::To_Radians(viewer_dir + Maze::viewer_fov / 2))),
-	//	0.0f, 0.0f, 0.0f);
-	//Edge viewRightEdge(501,
-	//	&Vertex(-1, Maze::viewer_posn[0], Maze::viewer_posn[1]),
-	//	&Vertex(-1, Maze::viewer_posn[0] + 2e+2 * cos(Maze::To_Radians(viewer_dir - Maze::viewer_fov / 2)),
-	//		Maze::viewer_posn[1] + 2e+2 * sin(Maze::To_Radians(viewer_dir - Maze::viewer_fov / 2))),
-	//	0.0f, 0.0f, 0.0f);
+
 	Vertex viewCenterVertex(-1, Maze::viewer_posn[0], Maze::viewer_posn[1]);
 	Vertex viewLeftVertex(-1, Maze::viewer_posn[0] + 2e+2 * cos(Maze::To_Radians(viewer_dir + Maze::viewer_fov / 2)),
 		Maze::viewer_posn[1] + 2e+2 * sin(Maze::To_Radians(viewer_dir + Maze::viewer_fov / 2)));
@@ -685,6 +676,8 @@ Draw_View(const float focal_dist)
 
 	passedCells.clear();
 	Draw_Cell(view_cell, viewLeftEdge, viewRightEdge, 0);
+	Draw_Map(5, 35, 394, 394);
+	Draw_Frustum(5, 35, 394, 394);
 }
 void Maze::Draw_Cell(Cell* currCell, Edge& limL, Edge& limR, int recDepth) {
 	recDepth++;
@@ -783,6 +776,11 @@ void Maze::Draw_Cell(Cell* currCell, Edge& limL, Edge& limR, int recDepth) {
 			//glVertex2f(drawEdgeBeg[0] * scale - 200, drawEdgeBeg[1] * scale - 200);
 			//glVertex2f(drawEdgeEnd[0] * scale - 200, drawEdgeEnd[1] * scale - 200);
 			//glEnd();
+			fl_color(0xe0, 0xe0, 0xe0);
+			float height = (int)ceil(mapWedge_scale * (max_yp - min_yp));
+			fl_polygon(mapWedge_minX + (int)floor(mapWedge_viewX), mapWedge_minY + height - (int)floor(mapWedge_viewY),
+				mapWedge_minX + (int)floor((drawEdgeBeg[0] - min_xp) * mapWedge_scale), mapWedge_minY + height - (int)floor((drawEdgeBeg[1] - min_yp) * mapWedge_scale),
+				mapWedge_minX + (int)floor((drawEdgeEnd[0] - min_xp) * mapWedge_scale), mapWedge_minY + height - (int)floor((drawEdgeEnd[1] - min_yp) * mapWedge_scale));
 
 			// 3D
 			vec4 objPositions[4];
@@ -890,8 +888,20 @@ Draw_Frustum(int min_x, int min_y, int max_x, int max_y)
 	min_x += 5;
 	min_y += 5;
 
+	
 	view_x = ( viewer_posn[X] - min_xp ) * scale;
 	view_y = ( viewer_posn[Y] - min_yp ) * scale;
+
+	Maze::mapWedge_minX = min_x;
+	Maze::mapWedge_minY = min_y;
+	Maze::mapWedge_maxX = max_x;
+	Maze::mapWedge_maxY = max_y;
+	Maze::mapWedge_scaleX = scale_x;
+	Maze::mapWedge_scaleY = scale_y;
+	Maze::mapWedge_scale = scale;
+	Maze::mapWedge_viewX = view_x;
+	Maze::mapWedge_viewY = view_y;
+
 	fl_line(min_x + (int)floor(view_x + 
 			  cos(To_Radians(viewer_dir+viewer_fov / 2.0)) * scale),
 			  min_y + height- 

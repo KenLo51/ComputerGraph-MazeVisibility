@@ -137,7 +137,11 @@ class Maze {
 		float	max_yp;	// The maximum y location of any vertex in the maze.
 
 		std::set<Cell*> passedCells;
-		std::set<Edge*> drawedEdges;
+
+		int mapWedge_minX, mapWedge_minY;
+		int mapWedge_maxX, mapWedge_maxY;
+		float mapWedge_scaleX, mapWedge_scaleY, mapWedge_scale;
+		float mapWedge_viewX, mapWedge_viewY;
 
 	public:
 		static const char	X; // Used to index into the viewer's position
