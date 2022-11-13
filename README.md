@@ -1,5 +1,4 @@
-# NTUST-1111-ComputerGraph-Project2
-NTUST 111-1-賴祐吉-電腦圖學導論 Project2(Maze Visibility)
+# ComputerGraph-Maze Visibility
 
 #### Libraries
  1. fltk-1.3.2
