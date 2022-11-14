@@ -1,4 +1,4 @@
-# ComputerGraph-Maze Visibility
+# ComputerGraph-Maze Visibility With Cell-Portal Visibility Algorithm
 
 #### Libraries
  1. fltk-1.3.2
