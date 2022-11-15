@@ -1,5 +1,7 @@
 # ComputerGraph-Maze Visibility With Cell-Portal Visibility Algorithm
 
+於計算3D迷宮並繪製(只使用glVertex2f指定繪製位置)。  
+
 #### Libraries
  1. fltk-1.3.2
  2. OpenGL 1.0
