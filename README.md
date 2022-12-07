@@ -1,4 +1,4 @@
-# ComputerGraph-Maze Visibility With Cell-Portal Visibility Algorithm
+# ComputerGraphic-Maze Visibility With Cell-Portal Visibility Algorithm
 
 1. 於CPU計算3D迷宮並繪製(只使用glVertex2f指定繪製位置)。  
 2. 實現3為空間轉換矩陣(不使用GLM)。
